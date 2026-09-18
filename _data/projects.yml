@@ -1,0 +1,53 @@
+# Projects. Add a new entry by copying the pattern below.
+# The "links" part is optional — leave it out for projects with no link.
+
+heading: Projects
+#blurb: A selection of engineering and software projects.
+
+# To add a thumbnail to the left of an item, drop the image file in images/
+# and add an "image" line to the item, e.g.:  image: images/robot.jpg
+
+items:
+  - title: "Makerspace - 2023 to 2026"
+    image: images/makerspace.png
+    description: >
+      I founded my university's makerspace. 
+    links:
+      - label: website
+        url: https://www.thesubath.com/makerspace/
+      - label: instagram
+        url: https://www.instagram.com/bathmakerspace
+
+  - title: "Wire Bending Machine for Real-Time Portable Art Fabrication - 2026"
+    image: images/wire-bending-machine.png
+    description: >
+      Demonstarted ephermal fabrication, characterized stick-slip friction as mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
+    links:
+      - label: project page
+        url: https://docs.google.com/presentation/d/1fL_F2kSvbs_uWii5a-oeDyhlu4fgILxSwcVH0_RhH30/edit?usp=sharing
+  - title: "Resin Formulation for 3D Printed Microfludic Devices - in progress"
+    image: images/microfluidics.png
+    description: >
+      The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. I conducted research in materials science for resin formulation.
+
+  - title: "Portrait Drawing Robot - 2025"
+    image: images/portrait-drawing-robot.png
+    description: >
+      Created an autonomous drawing robot by developing a software pipeline that
+      converts photos into G-code for a modified 3D printer. Used to draw 100+
+      portraits at the University of Bath Groups Fair.
+    links:
+      - label: code
+        url: https://github.com/horatio-hamkins/Portrait-Draw
+  
+  - title: "AI-Marker: An Autonomous Agent for Marking Business Coursework - 2025"
+    video: images/ai-marker-demo.mp4
+    description: >
+      As part of a Business for Engineering class, designed a workflow
+      incorporating nine separate AI agents to facilitate the autonomous marking
+      of university coursework.
+    links:
+      - label: project page
+        url: https://docs.google.com/presentation/d/1NYVXI3XqA2_q61FUWybzQQa86Vte8kzDj7MrQANke3s/edit?usp=sharing
+  
+  

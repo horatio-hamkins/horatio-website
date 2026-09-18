@@ -1,0 +1,46 @@
+# Research publications. Add a new entry by copying the pattern below.
+# Use **bold** for your own name and _underscores_ for journal names.
+
+heading: Research
+blurb: >
+  My research spans medical physics (quality assurance of adaptive radiotherapy
+  with 3D-printed phantoms), human-robot collaboration in welding, and personal
+  fabrication of large-scale structures.
+
+# To add a thumbnail to the left of an item, drop the image file in images/
+# and add an "image" line to the item, e.g.:  image: images/phantom.jpg
+# Or use "video" for an mp4 that plays on hover and resets on mouse-leave,
+# e.g.:  video: images/phantom-demo.mp4
+
+items:
+  - title: "Automated Design of Patient-Specific 4D-Printed Phantoms for Quality Assurance of Adaptive Radiotherapy on a 1.5T MR-Linac"
+    video: images/radiotherapy-phantom-demo.mp4
+    authors: "**Horatio Hamkins**, Ka Ho Tam, Angela Sobremonte, Sandeep Jogi, Eugene Koay, Comron Hassanzadeh, Paul Segars, Neelam Tyagi, Ergys Subashi"
+    venue: "_3D Printing in Medicine_ (under review), 2026"
+    links:
+      - label: paper
+        url: https://www.medrxiv.org/content/10.64898/2026.07.09.26357659v1
+
+  - title: "Extended Reality-Based Human-Robotic Collaborative Welding Systems: A Review"
+    image: images/xr-hrc-welding-teleoperation.png
+    authors: "**Horatio Hamkins**, Christelle Grandvallet, Frédéric Vignat"
+    venue: "_The International Journal of Advanced Manufacturing Technology_, 2026"
+    links:
+      - label: paper
+        url: https://link.springer.com/article/10.1007/s00170-026-18745-8
+
+  - title: "AirForce: Personal Fabrication of Large-Scale, Load-Bearing Animatronics Structures from a Single Tube"
+    image: images/airforce-teaser.png
+    authors: "Lukas Rambold, Robert Kovacs, Min Deng, Antonius Nauman, Konrad Gerlach, **Horatio Hamkins**, Helena Lendowski, Chiao Fang, Shohei Katakura, Conrad Lemper, Muhammad Abdullah, Patrick Baudisch"
+    venue: "_Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI '26)_, 2026"
+    links:
+      - label: paper
+        url: https://dl.acm.org/doi/full/10.1145/3772318.3791706
+
+  - title: "3D-Printed Multi-Contrast Phantom for Quality Assurance of Adaptive Radiotherapy Delivery in a High-Field MR-Linac"
+    image: images/radiotherapyimage.jpg
+    authors: "Ergys Subashi, **Horatio Hamkins**, Samuel Hellman, Neelam Tyagi"
+    venue: "_UCLA 9th MR in RT Symposium_, 2023"
+    links:
+      - label: paper
+        url: https://www.uclahealth.org/sites/default/files/documents/b7/mrinrt-final-program-updated2-2-2023.pdf#page=177

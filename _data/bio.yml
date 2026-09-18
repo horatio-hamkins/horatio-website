@@ -1,0 +1,21 @@
+# Your bio, shown at the top of the page.
+# Write paragraphs as plain text with markdown (**bold**, [links](https://...)).
+
+paragraphs:
+  - >
+    I am an interdisciplinary engineer with research experience in soft robotics,
+    human-computer interaction, industrial engineering, and medical physics. 
+  - >
+    I've just finished my master's degree in Mechanical Engineering from the University of Bath where developed a CNC wire bending machine and software for real-time portable art
+    fabrication (First-Class Honours).
+
+# Contact links, shown centered under the bio.
+
+contacts:
+- label: LinkedIn
+    url: https://www.linkedin.com/in/horatio-hamkins-2ab401148/
+- label: GitHub
+    url: https://github.com/horatio-hamkins
+- label: Google Scholar
+    url: https://scholar.google.com/citations?user=aByuh50AAAAJ
+  

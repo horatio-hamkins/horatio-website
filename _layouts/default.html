@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <title>{{ site.name }}</title>
+
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+  <meta name="author" content="{{ site.name }}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+    <tr style="padding:0px">
+      <td style="padding:0px">
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr style="padding:0px">
+            <td style="padding:2.5%;width:70%;vertical-align:middle">
+              <h1>
+                {{ site.name }}
+              </h1>
+              {% for paragraph in site.data.bio.paragraphs %}
+              {{ paragraph | markdownify }}
+              {% endfor %}
+              <p style="text-align:center">
+                {% for contact in site.data.bio.contacts %}
+                <a href="{{ contact.url }}">{{ contact.label }}</a>{% unless forloop.last %} &nbsp;/&nbsp;{% endunless %}
+                {% endfor %}
+              </p>
+            </td>
+            <td style="padding:2.5%;width:30%;vertical-align:middle">
+              {% include avatar.svg %}
+              {% if site.avatar_caption %}
+              <p style="text-align:center;font-size:small;">{{ site.avatar_caption }}</p>
+              {% endif %}
+            </td>
+          </tr>
+        </table>
+
+        {% assign section_names = "projects publications" | split: " " %}
+        {% for section_name in section_names %}
+        {% assign section = site.data[section_name] %}
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr>
+            <td style="padding:2.5%;width:100%;vertical-align:middle">
+              <h2>{{ section.heading }}</h2>
+              {{ section.blurb | markdownify }}
+            </td>
+          </tr>
+        </table>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+
+          {% for item in section.items %}
+          <tr>
+            <td style="padding:2.5%;width:50%;vertical-align:middle">
+              {% if item.video %}
+              <video class="hover-video" src="{{ item.video | relative_url }}" style="width:100%" muted loop playsinline preload="auto" disablepictureinpicture></video>
+              {% elsif item.image %}
+              <img src="{{ item.image | relative_url }}" style="width:100%" alt="{{ item.title }}">
+              {% endif %}
+            </td>
+            <td style="padding:2.5%;width:50%;vertical-align:middle">
+              <h3>{{ item.title }}</h3>
+              <br>
+              {% if item.authors %}
+              {{ item.authors | markdownify | remove:'<p>' | remove:'</p>' }}
+              <br>
+              {% endif %}
+              {% if item.description %}
+              {{ item.description | markdownify | remove:'<p>' | remove:'</p>' }}
+              {% endif %}
+              {% if item.venue %}
+              <br>
+              {{ item.venue | markdownify | remove:'<p>' | remove:'</p>' }}
+              {% endif %}
+              {% if item.links %}
+              <br>
+              {% for link in item.links %}
+              <a href="{{ link.url }}">{{ link.label }}</a>{% unless forloop.last %} &nbsp;/&nbsp;{% endunless %}
+              {% endfor %}
+              {% endif %}
+              <p></p>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </table>
+        <br>
+        <br>
+        <br>
+        {% endfor %}
+      </td>
+    </tr>
+  </table>
+
+  <script>
+  // Hover videos: play while hovered, pause and rewind when the cursor leaves.
+  document.querySelectorAll('video.hover-video').forEach(function (v) {
+    v.addEventListener('mouseenter', function () { v.play(); });
+    v.addEventListener('mouseleave', function () {
+      v.pause();
+      v.currentTime = 0;
+    });
+  });
+  </script>
+
+  <script>
+  (function () {
+    var svg = document.getElementById('avatar-svg');
+    if (!svg) return;
+
+    var textGroup = svg.querySelector('g[id^="text"]');
+    var strokes = [];
+    svg.querySelectorAll('path').forEach(function (p) {
+      // The text is drawn as filled glyph outlines, not strokes: it fades
+      // in at the end instead of taking a turn in the drawing sequence.
+      if (textGroup && textGroup.contains(p)) return;
+      var len = p.getTotalLength();
+      if (!isFinite(len) || len === 0) return;
+      // Dash values must stay in the path's own user units (dashing is
+      // applied before transforms). The scale-adjusted length is kept
+      // separately, for pacing only.
+      var m = p.getCTM();
+      var scale = m ? Math.sqrt(Math.abs(m.a * m.d - m.b * m.c)) : 1;
+      strokes.push({ el: p, len: len, screenLen: len * scale });
+    });
+
+    // Respect users who prefer reduced motion: show the finished drawing.
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Hide every stroke: a dash gap as long as the path itself.
+    strokes.forEach(function (st) {
+      st.el.style.strokeDasharray = st.len;
+      st.el.style.strokeDashoffset = st.len;
+    });
+
+    // Hide the caption piece by piece so its parts can fade in one after
+    // another once the drawing finishes. Order left to right, merging
+    // horizontally overlapping pieces (dot and stem of an i, a letter's
+    // inner counters) so each letter appears in one go.
+    var textParts = [];
+    if (textGroup) {
+      var parts = Array.prototype.slice.call(textGroup.children);
+      parts.sort(function (a, b) { return a.getBBox().x - b.getBBox().x; });
+      var letters = [];
+      parts.forEach(function (el) {
+        var b = el.getBBox();
+        var letter = letters[letters.length - 1];
+        if (letter && b.x < letter.maxX) {
+          letter.parts.push(el);
+          letter.maxX = Math.max(letter.maxX, b.x + b.width);
+        } else {
+          letters.push({ maxX: b.x + b.width, parts: [el] });
+        }
+      });
+      letters.forEach(function (letter) {
+        textParts = textParts.concat(letter.parts);
+      });
+      textParts.forEach(function (el) { el.style.opacity = 0; });
+    }
+
+    // Fisher-Yates shuffle: a new random drawing order on every page load.
+    for (var i = strokes.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = strokes[i]; strokes[i] = strokes[j]; strokes[j] = tmp;
+    }
+
+    var drawSeconds = 3.5;                                  // total portrait time, ink + travel
+    var textSeconds = 1;                                  // caption fade-in, after the drawing
+    var travelMs = 50;                                    // pen travel between strokes, part of the budget
+    var totalLen = strokes.reduce(function (s, st) { return s + st.screenLen; }, 0);
+    var inkMs = Math.max(500, drawSeconds * 1000 - travelMs * Math.max(0, strokes.length - 1));
+    var pxPerMs = totalLen / inkMs;
+
+    var k = 0;
+    function drawNext() {
+      if (k >= strokes.length) {
+        // Drawing done: fade each caption part in, one after another.
+        var slice = (textSeconds * 1000) / Math.max(1, textParts.length);
+        textParts.forEach(function (el, i) {
+          setTimeout(function () {
+            el.style.transition = 'opacity ' + Math.round(slice) + 'ms';
+            el.style.opacity = 1;
+          }, i * slice);
+        });
+        return;
+      }
+      var st = strokes[k++];
+      var dur = Math.max(30, st.screenLen / pxPerMs);     // longer lines draw slower
+      st.el.style.transition = 'stroke-dashoffset ' + dur + 'ms linear';
+      st.el.style.strokeDashoffset = '0';
+      setTimeout(drawNext, dur + travelMs);
+    }
+    requestAnimationFrame(function () { requestAnimationFrame(drawNext); });
+  })();
+  </script>
+</body>
+
+</html>
