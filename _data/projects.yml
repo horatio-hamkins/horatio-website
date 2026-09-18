@@ -21,11 +21,11 @@ items:
   - title: "Wire Bending Machine for Real-Time Portable Art Fabrication - 2026"
     image: images/wire-bending-machine.png
     description: >
-      Demonstarted ephermal fabrication, characterized stick-slip friction as mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
+      Demonstrated ephermal fabrication, characterized stick-slip friction as mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
     links:
       - label: project page
         url: https://docs.google.com/presentation/d/1fL_F2kSvbs_uWii5a-oeDyhlu4fgILxSwcVH0_RhH30/edit?usp=sharing
-  - title: "Resin Formulation for 3D Printed Microfludic Devices - in progress"
+  - title: "Resin Formulation for 3D Printed Microfluidic Devices - in progress"
     image: images/microfluidics.png
     description: >
       The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. I conducted research in materials science for resin formulation.
