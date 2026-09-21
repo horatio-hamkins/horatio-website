@@ -24,7 +24,7 @@ items:
       Demonstrated ephermal fabrication, characterized stick-slip friction as mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
     links:
       - label: project page
-        url: https://docs.google.com/presentation/d/1fL_F2kSvbs_uWii5a-oeDyhlu4fgILxSwcVH0_RhH30/edit?usp=sharing
+        url: /assets/files/FYP_final_presentation.pdf
   - title: "Resin Formulation for 3D Printed Microfluidic Devices - in progress"
     image: images/microfluidics.png
     description: >
@@ -48,6 +48,6 @@ items:
       of university coursework.
     links:
       - label: project page
-        url: https://docs.google.com/presentation/d/1NYVXI3XqA2_q61FUWybzQQa86Vte8kzDj7MrQANke3s/edit?usp=sharing
+        url: /assets/files/ai_marker_buisness_report.pdf
   
   

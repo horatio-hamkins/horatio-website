@@ -11,6 +11,8 @@ paragraphs:
 # Contact links, shown centered under the bio.
 
 contacts:
+- label: CV
+  url: /assets/files/horatio_cv_2026.pdf
 - label: LinkedIn
   url: https://www.linkedin.com/in/horatio-hamkins-2ab401148/
 - label: GitHub
