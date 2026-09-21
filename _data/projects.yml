@@ -11,7 +11,7 @@ items:
   - title: "Makerspace - 2023 to 2026"
     image: images/makerspace.png
     description: >
-      I founded my university's makerspace. 
+      I founded the University of Bath Makerspace, with funding from Research Culture England, University of Bath Alumni Association, SETsquared Bath Innovation Center, Center For Excellence In Engineering & Design Education, The Student Union, and the Department of Mechanical Engineering. 
     links:
       - label: website
         url: https://www.thesubath.com/makerspace/
@@ -28,7 +28,7 @@ items:
   - title: "Resin Formulation for 3D Printed Microfluidic Devices - in progress"
     image: images/microfluidics.png
     description: >
-      The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. I conducted research in materials science for resin formulation.
+      The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. I am currently conducting research in materials science for resin formulation.
 
   - title: "Portrait Drawing Robot - 2025"
     image: images/portrait-drawing-robot.png
