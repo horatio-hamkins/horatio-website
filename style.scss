@@ -125,6 +125,47 @@ span.highlight {
   background-color: #ffffd0;
 }
 
+/**************/
+/* ENTRIES    */
+/**************/
+
+// Media shown to the left of each entry: locked to a 2:1 width:height box.
+// object-fit crops images/videos to fill the box instead of stretching them.
+.entry-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+}
+
+// Wrapper that stacks a base image and (optionally) a hover image in the
+// same 2:1 box. The hover layer only swaps in when the wrapper itself is
+// hovered (not the row, not the cell padding) — and pointer-events is
+// disabled on whichever layer is currently hidden, so the hit region is
+// exactly the image bounds.
+.entry-media-swap {
+  position: relative;
+  overflow: hidden;
+}
+.entry-media-swap .entry-media-base {
+  transition: opacity .2s ease-in-out;
+}
+.entry-media-swap .entry-media-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .2s ease-in-out;
+  pointer-events: none;
+}
+.entry-media-swap.has-hover:hover .entry-media-hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+.entry-media-swap.has-hover:hover .entry-media-base {
+  opacity: 0;
+  pointer-events: none;
+}
+
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 //@import "highlights";

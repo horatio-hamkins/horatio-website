@@ -23,6 +23,7 @@ items:
 
   - title: "Extended Reality-Based Human-Robotic Collaborative Welding Systems: A Review"
     image: images/xr-hrc-welding-teleoperation.png
+    image_hover: images/xr-hrc-welding-hover.png
     authors: "**Horatio Hamkins**, Christelle Grandvallet, Frédéric Vignat"
     venue: "_The International Journal of Advanced Manufacturing Technology_, 2026"
     links:
@@ -39,6 +40,7 @@ items:
 
   - title: "3D-Printed Multi-Contrast Phantom for Quality Assurance of Adaptive Radiotherapy Delivery in a High-Field MR-Linac"
     image: images/radiotherapyimage.jpg
+    image_hover: images/mdanderson2024.png
     authors: "Ergys Subashi, **Horatio Hamkins**, Samuel Hellman, Neelam Tyagi"
     venue: "_UCLA 9th MR in RT Symposium_, 2023"
     links:

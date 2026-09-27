@@ -10,8 +10,9 @@ heading: Projects
 items:
   - title: "Makerspace - 2023 to 2026"
     image: images/makerspace.png
+    video_hover: images/makerspace-hover.mp4
     description: >
-      I founded the University of Bath Makerspace, with funding from Research Culture England, University of Bath Alumni Association, SETsquared Bath Innovation Center, Center For Excellence In Engineering & Design Education, The Student Union, and the Department of Mechanical Engineering. 
+      I founded the University of Bath Makerspace and an accompanying robot fighting competition with funding from Research Culture England, University of Bath Alumni Association, SETsquared Bath Innovation Center, Center For Excellence In Engineering & Design Education, The Student Union, and the Department of Mechanical Engineering. 
     links:
       - label: website
         url: https://www.thesubath.com/makerspace/
@@ -19,7 +20,8 @@ items:
         url: https://www.instagram.com/bathmakerspace
 
   - title: "Wire Bending Machine for Real-Time Portable Art Fabrication - 2026"
-    image: images/wire-bending-machine.png
+    image: images/wirebending.png
+    video_hover: images/wirebending-hover.mp4
     description: >
       Demonstrated ephermal fabrication, characterized stick-slip friction as mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
     links:
@@ -27,6 +29,7 @@ items:
         url: /assets/files/FYP_final_presentation.pdf
   - title: "Resin Formulation for 3D Printed Microfluidic Devices - in progress"
     image: images/microfluidics.png
+    video_hover: images/microfluidics-hover.mp4
     description: >
       The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. I am currently conducting research in materials science for resin formulation.
 
@@ -39,14 +42,15 @@ items:
       Developed with financial support from the Arthur Clements Fund. 
       
   - title: "Portrait Drawing Robot - 2025"
-    image: images/portrait-drawing-robot.png
+    image: images/portraitdrawimage.png
+    video_hover: images/portrait-robot-hover.mp4
     description: >
       Created an autonomous drawing robot by developing a software pipeline that
       converts photos into G-code for a modified 3D printer. Used to draw 100+
       portraits at the University of Bath Groups Fair.
     links:
       - label: code
-        url: https://github.com/horatio-hamkins/Portrait-Draw
+        url: https://github.com/horatio-hamkins/Portrait-Outliner
   
   - title: "AI-Marker: An Autonomous Agent for Marking Business Coursework - 2025"
     video: images/ai-marker-demo.mp4

@@ -58,14 +58,21 @@
 
           {% for item in section.items %}
           <tr>
-            <td style="padding:2.5%;width:50%;vertical-align:middle">
+            <td style="padding:2.5%;width:50%;vertical-align:top">
               {% if item.video %}
-              <video class="hover-video" src="{{ item.video | relative_url }}" style="width:100%" muted loop playsinline preload="auto" disablepictureinpicture></video>
+              <video class="hover-video entry-media" src="{{ item.video | relative_url }}" muted loop playsinline preload="auto" disablepictureinpicture></video>
               {% elsif item.image %}
-              <img src="{{ item.image | relative_url }}" style="width:100%" alt="{{ item.title }}">
+              <div class="entry-media entry-media-swap{% if item.image_hover or item.video_hover %} has-hover{% endif %}">
+                <img class="entry-media entry-media-base" src="{{ item.image | relative_url }}" alt="{{ item.title }}">
+                {% if item.image_hover %}
+                <img class="entry-media entry-media-hover" src="{{ item.image_hover | relative_url }}" alt="" aria-hidden="true">
+                {% elsif item.video_hover %}
+                <video class="hover-video entry-media entry-media-hover" src="{{ item.video_hover | relative_url }}" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"></video>
+                {% endif %}
+              </div>
               {% endif %}
             </td>
-            <td style="padding:2.5%;width:50%;vertical-align:middle">
+            <td style="padding:2.5%;width:50%;vertical-align:top">
               <h3>{{ item.title }}</h3>
               <br>
               {% if item.authors %}
@@ -101,9 +108,24 @@
 
   <script>
   // Hover videos: play while hovered, pause and rewind when the cursor leaves.
+  // Two flavors:
+  //   - Standalone videos (no swap wrapper): trigger on the video itself.
+  //   - Swap videos (inside .entry-media-swap): trigger on the wrapper, so
+  //     the hit region is the exact image bounds — not the surrounding
+  //     cell padding, not a neighboring entry's hover video.
   document.querySelectorAll('video.hover-video').forEach(function (v) {
+    if (v.closest('.entry-media-swap')) return;   // handled below
     v.addEventListener('mouseenter', function () { v.play(); });
     v.addEventListener('mouseleave', function () {
+      v.pause();
+      v.currentTime = 0;
+    });
+  });
+  document.querySelectorAll('.entry-media-swap.has-hover').forEach(function (wrap) {
+    var v = wrap.querySelector('video.hover-video');
+    if (!v) return;
+    wrap.addEventListener('mouseenter', function () { v.play(); });
+    wrap.addEventListener('mouseleave', function () {
       v.pause();
       v.currentTime = 0;
     });
