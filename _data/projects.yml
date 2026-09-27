@@ -30,6 +30,14 @@ items:
     description: >
       The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. I am currently conducting research in materials science for resin formulation.
 
+  - title: "Mobile Computing With Generative User Interfaces on E-Ink Devices - in progress"
+    image: images/eink.png  
+    description: > 
+      AI agents with superhuman computer-use capabilities are here. In this project, I imagine
+      a future where a human user interacts with their agent through a portable e-ink device to perform their job.
+      The experience feels like writing in a journal, or sketching in a notebook, but with intelligence embedded in the page.
+      Developed with financial support from the Arthur Clements Fund. 
+      
   - title: "Portrait Drawing Robot - 2025"
     image: images/portrait-drawing-robot.png
     description: >
@@ -50,4 +58,4 @@ items:
       - label: project page
         url: /assets/files/ai_marker_buisness_report.pdf
   
-  
+ 
