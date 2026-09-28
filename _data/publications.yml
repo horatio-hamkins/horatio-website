@@ -31,7 +31,8 @@ items:
         url: https://link.springer.com/article/10.1007/s00170-026-18745-8
 
   - title: "AirForce: Personal Fabrication of Large-Scale, Load-Bearing Animatronics Structures from a Single Tube"
-    image: images/airforce-teaser.png
+    image: images/airforce-image.png
+    image_hover: images/airforce1234.png
     authors: "Lukas Rambold, Robert Kovacs, Min Deng, Antonius Nauman, Konrad Gerlach, **Horatio Hamkins**, Helena Lendowski, Chiao Fang, Shohei Katakura, Conrad Lemper, Muhammad Abdullah, Patrick Baudisch"
     venue: "_Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI '26)_, 2026"
     links:
@@ -39,7 +40,7 @@ items:
         url: https://dl.acm.org/doi/full/10.1145/3772318.3791706
 
   - title: "3D-Printed Multi-Contrast Phantom for Quality Assurance of Adaptive Radiotherapy Delivery in a High-Field MR-Linac"
-    image: images/radiotherapyimage.jpg
+    image: images/mskdataand3dprintgraph.png
     image_hover: images/mdanderson2024.png
     authors: "Ergys Subashi, **Horatio Hamkins**, Samuel Hellman, Neelam Tyagi"
     venue: "_UCLA 9th MR in RT Symposium_, 2023"
