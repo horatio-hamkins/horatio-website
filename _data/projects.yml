@@ -23,7 +23,7 @@ items:
     image: images/wirebending.png
     video_hover: images/wirebending-hover.mp4
     description: >
-      Demonstrated ephermal fabrication, characterized stick-slip friction as mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
+      In creating this machine, I demonstrated ephemeral fabrication, characterized stick-slip friction as a mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
     links:
       - label: project page
         url: /assets/files/FYP_final_presentation.pdf
@@ -31,13 +31,13 @@ items:
     image: images/microfluidics.png
     video_hover: images/microfluidics-hover.mp4
     description: >
-      The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. I am currently conducting research in materials science for resin formulation.
+      The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. My current research in materials science aims to develop a type of resin that is conductive to this goal.
 
   - title: "Mobile Computing With Generative User Interfaces on E-Ink Devices - in progress"
     image: images/eink.png  
     description: > 
-      AI agents with superhuman computer-use capabilities are here. In this project, I imagine
-      a future where a human user interacts with their agent through a portable e-ink device to perform their job.
+      AI agents with superhuman computer-use capabilities are here. In this project, I develop a device to help imagine a future where
+      human users interact with AI agents through portable e-ink devices to perform their job.
       The experience feels like writing in a journal, or sketching in a notebook, but with intelligence embedded in the page.
       Developed with financial support from the Arthur Clements Fund. 
       
@@ -45,14 +45,14 @@ items:
     image: images/portraitdrawimage.png
     video_hover: images/portrait-robot-hover.mp4
     description: >
-      Created an autonomous drawing robot by developing a software pipeline that
-      converts photos into G-code for a modified 3D printer. Used to draw 100+
+      I created an autonomous drawing robot by developing a software pipeline that
+      converts photos into G-code for a modified 3D printer, and used it to draw 100+
       portraits at the University of Bath Groups Fair.
     links:
       - label: code
         url: https://github.com/horatio-hamkins/Portrait-Outliner
   
-  - title: "AI-Marker: An Autonomous Agent for Marking Business Coursework - 2025"
+  - title: "AI-Marker: A Multi-Agent System for Marking Business Coursework - 2025"
     video: images/ai-marker-demo.mp4
     description: >
       As part of a Business for Engineering class, designed a workflow
