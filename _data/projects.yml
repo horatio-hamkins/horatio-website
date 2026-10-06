@@ -27,6 +27,7 @@ items:
     links:
       - label: project page
         url: /assets/files/FYP_final_presentation.pdf
+
   - title: "Resin Formulation for 3D Printed Microfluidic Devices - in progress"
     image: images/microfluidics.png
     video_hover: images/microfluidics-hover.mp4
@@ -34,7 +35,7 @@ items:
       The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. My current research in materials science aims to develop a type of resin that is conductive to this goal.
 
   - title: "Mobile Computing With Generative User Interfaces on E-Ink Devices - in progress"
-    image: images/eink.png  
+    video: images/einkvideo.mp4
     description: > 
       AI agents with superhuman computer-use capabilities are here. In this project, I develop a device to help imagine a future where
       human users interact with AI agents through portable e-ink devices to perform their job.
@@ -43,7 +44,7 @@ items:
       
   - title: "Portrait Drawing Robot - 2025"
     image: images/portraitdrawimage.png
-    video_hover: images/portrait-robot-hover.mp4
+    video: images/portrait-robot-hover.mp4
     description: >
       I created an autonomous drawing robot by developing a software pipeline that
       converts photos into G-code for a modified 3D printer, and used it to draw 100+
