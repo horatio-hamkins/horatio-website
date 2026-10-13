@@ -157,13 +157,59 @@ span.highlight {
   transition: opacity .2s ease-in-out;
   pointer-events: none;
 }
-.entry-media-swap.has-hover:hover .entry-media-hover {
+// :hover only exists on hover-capable devices; on touch devices JS toggles
+// .is-playing on the wrapper instead (tap to play / tap to stop).
+@media (hover: hover) {
+  .entry-media-swap.has-hover:hover .entry-media-hover {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .entry-media-swap.has-hover:hover .entry-media-base {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+.entry-media-swap.is-playing .entry-media-hover {
   opacity: 1;
   pointer-events: auto;
 }
-.entry-media-swap.has-hover:hover .entry-media-base {
+.entry-media-swap.is-playing .entry-media-base {
   opacity: 0;
   pointer-events: none;
+}
+
+// Standalone videos: a small play badge over paused ones on touch devices,
+// so they don't masquerade as static images. Hover-capable devices never
+// show it (the hover interaction itself is the affordance) and taps pass
+// straight through to the video underneath.
+.video-box {
+  position: relative;
+}
+.play-hint {
+  display: none;
+  position: absolute;
+  right: 4%;
+  bottom: 4%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+.play-hint::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  margin-top: -8px;
+  border-style: solid;
+  border-width: 8px 0 8px 14px;
+  border-color: transparent transparent transparent #fff;
+}
+@media (hover: none), (pointer: coarse) {
+  .video-box.paused .play-hint {
+    display: block;
+  }
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

@@ -6,10 +6,13 @@ heading: Projects
 
 # To add a thumbnail to the left of an item, drop the image file in images/
 # and add an "image" line to the item, e.g.:  image: images/robot.jpg
+# For "video" entries, drop a still frame at <name>-poster.jpg too
+# (e.g. images/demo.mp4 -> images/demo-poster.jpg): phones don't preload
+# videos, so the poster is what shows until the video plays.
 
 items:
   - title: "Makerspace - 2023 to 2026"
-    image: images/makerspace.png
+    image: images/makerspace.jpg
     video_hover: images/makerspace-hover.mp4
     description: >
       I founded the University of Bath Makerspace and an accompanying robot fighting competition with funding from Research Culture England, University of Bath Alumni Association, SETsquared Bath Innovation Center, Center For Excellence In Engineering & Design Education, The Student Union, and the Department of Mechanical Engineering. 
@@ -20,7 +23,7 @@ items:
         url: https://www.instagram.com/bathmakerspace
 
   - title: "Wire Bending Machine for Real-Time Portable Art Fabrication - 2026"
-    image: images/wirebending.png
+    image: images/wirebending.jpg
     video_hover: images/wirebending-hover.mp4
     description: >
       In creating this machine, I demonstrated ephemeral fabrication, characterized stick-slip friction as a mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
@@ -29,7 +32,7 @@ items:
         url: /assets/files/FYP_final_presentation.pdf
 
   - title: "Resin Formulation for 3D Printed Microfluidic Devices - in progress"
-    image: images/microfluidics.png
+    image: images/microfluidics.jpg
     video_hover: images/microfluidics-hover.mp4
     description: >
       The democratization of microfluidic technology requires machines capable of rapid fabrication of microfluidic devices. My current research in materials science aims to develop a type of resin that is conductive to this goal.
@@ -43,7 +46,7 @@ items:
       Developed with financial support from the Arthur Clements Fund. 
       
   - title: "Portrait Drawing Robot - 2025"
-    image: images/portraitdrawimage.png
+    image: images/portraitdrawimage.jpg
     video: images/portrait-robot-hover.mp4
     description: >
       I created an autonomous drawing robot by developing a software pipeline that

@@ -60,14 +60,17 @@
           <tr>
             <td style="padding:2.5%;width:50%;vertical-align:top">
               {% if item.video %}
-              <video class="hover-video entry-media" src="{{ item.video | relative_url }}" muted loop playsinline preload="auto" disablepictureinpicture></video>
+              <div class="video-box paused">
+                <video class="hover-video entry-media" src="{{ item.video | relative_url }}" poster="{{ item.video | replace:'.mp4','-poster.jpg' | relative_url }}" muted loop playsinline preload="auto" disablepictureinpicture></video>
+                <span class="play-hint" aria-hidden="true"></span>
+              </div>
               {% elsif item.image %}
               <div class="entry-media entry-media-swap{% if item.image_hover or item.video_hover %} has-hover{% endif %}">
                 <img class="entry-media entry-media-base" src="{{ item.image | relative_url }}" alt="{{ item.title }}">
                 {% if item.image_hover %}
                 <img class="entry-media entry-media-hover" src="{{ item.image_hover | relative_url }}" alt="" aria-hidden="true">
                 {% elsif item.video_hover %}
-                <video class="hover-video entry-media entry-media-hover" src="{{ item.video_hover | relative_url }}" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"></video>
+                <video class="hover-video entry-media entry-media-hover" src="{{ item.video_hover | relative_url }}" poster="{{ item.video_hover | replace:'.mp4','-poster.jpg' | relative_url }}" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"></video>
                 {% endif %}
               </div>
               {% endif %}
@@ -107,29 +110,60 @@
   </table>
 
   <script>
-  // Hover videos: play while hovered, pause and rewind when the cursor leaves.
-  // Two flavors:
-  //   - Standalone videos (no swap wrapper): trigger on the video itself.
-  //   - Swap videos (inside .entry-media-swap): trigger on the wrapper, so
-  //     the hit region is the exact image bounds — not the surrounding
-  //     cell padding, not a neighboring entry's hover video.
-  document.querySelectorAll('video.hover-video').forEach(function (v) {
-    if (v.closest('.entry-media-swap')) return;   // handled below
-    v.addEventListener('mouseenter', function () { v.play(); });
-    v.addEventListener('mouseleave', function () {
+  // Entry videos. Two interaction models, chosen once at load:
+  //   - Hover-capable devices (desktop): play while hovered, pause and
+  //     rewind when the cursor leaves. Swap videos trigger on the wrapper,
+  //     so the hit region is the exact image bounds — not the surrounding
+  //     cell padding, not a neighboring entry's hover video. The markup's
+  //     preload="auto" keeps the buffer full so the first hover is instant.
+  //   - Touch devices (no hover): tap to play, tap again to stop and
+  //     rewind. The wrapper gets .is-playing, which reveals the video
+  //     overlay the same way :hover does on desktop. Synthetic mouse
+  //     events differ per mobile browser, so touch uses click only.
+  //     Phones don't preload videos (and iOS ignores preload entirely),
+  //     so touch devices downgrade to preload="metadata": the poster
+  //     covers the entry and the video streams only when played.
+  (function () {
+    var touch = window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+    function play(v, wrap) {
+      if (wrap) wrap.classList.add('is-playing');
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});   // interrupted by a quick pause-then-play: benign
+    }
+    function stop(v, wrap) {
       v.pause();
-      v.currentTime = 0;
+      // Seek only when media data is present; a video that never started
+      // is already at 0, and seeking without data leaves a pending seek.
+      if (v.readyState >= 2 && v.currentTime !== 0) v.currentTime = 0;
+      if (wrap) wrap.classList.remove('is-playing');
+    }
+
+    document.querySelectorAll('video.hover-video').forEach(function (v) {
+      var wrap = v.closest('.entry-media-swap');   // null for standalone videos
+      var target = wrap || v;
+      if (touch) {
+        v.preload = 'metadata';   // keep the phone's page light; poster covers the entry
+        v.load();
+        target.addEventListener('click', function () {
+          if (v.paused) play(v, wrap); else stop(v, wrap);
+        });
+      } else {
+        target.addEventListener('mouseenter', function () { play(v, wrap); });
+        target.addEventListener('mouseleave', function () { stop(v, wrap); });
+      }
     });
-  });
-  document.querySelectorAll('.entry-media-swap.has-hover').forEach(function (wrap) {
-    var v = wrap.querySelector('video.hover-video');
-    if (!v) return;
-    wrap.addEventListener('mouseenter', function () { v.play(); });
-    wrap.addEventListener('mouseleave', function () {
-      v.pause();
-      v.currentTime = 0;
+
+    // Play badge on standalone videos (shown by CSS on touch devices):
+    // mirror the paused state, including programmatic changes.
+    document.querySelectorAll('.video-box > video').forEach(function (v) {
+      var box = v.closest('.video-box');
+      function sync() { box.classList.toggle('paused', v.paused); }
+      v.addEventListener('pause', sync);
+      v.addEventListener('play', sync);
+      sync();
     });
-  });
+  })();
   </script>
 
   <script>
