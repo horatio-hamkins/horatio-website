@@ -178,10 +178,12 @@ span.highlight {
   pointer-events: none;
 }
 
-// Standalone videos: a small play badge over paused ones on touch devices,
-// so they don't masquerade as static images. Hover-capable devices never
-// show it (the hover interaction itself is the affordance) and taps pass
-// straight through to the video underneath.
+// Video entries (standalone videos and image→video swaps): a small play
+// badge over paused ones on touch devices, so they don't masquerade as
+// static images. Hover-capable devices never show it (the hover
+// interaction itself is the affordance) and taps pass straight through
+// to the media underneath. The badge overlays the paused media of both
+// wrapper types; JS mirrors the video's paused state into .paused.
 .video-box {
   position: relative;
 }
@@ -207,7 +209,8 @@ span.highlight {
   border-color: transparent transparent transparent #fff;
 }
 @media (hover: none), (pointer: coarse) {
-  .video-box.paused .play-hint {
+  .video-box.paused .play-hint,
+  .entry-media-swap.paused .play-hint {
     display: block;
   }
 }

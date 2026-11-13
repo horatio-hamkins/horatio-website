@@ -71,6 +71,7 @@
                 <img class="entry-media entry-media-hover" src="{{ item.image_hover | relative_url }}" alt="" aria-hidden="true">
                 {% elsif item.video_hover %}
                 <video class="hover-video entry-media entry-media-hover" src="{{ item.video_hover | relative_url }}" poster="{{ item.video_hover | replace:'.mp4','-poster.jpg' | relative_url }}" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"></video>
+                <span class="play-hint" aria-hidden="true"></span>
                 {% endif %}
               </div>
               {% endif %}
@@ -110,7 +111,7 @@
   </table>
 
   <script>
-  // Entry videos. Two interaction models, chosen once at load:
+  // Entry videos. Two interaction models, checked live on every event:
   //   - Hover-capable devices (desktop): play while hovered, pause and
   //     rewind when the cursor leaves. Swap videos trigger on the wrapper,
   //     so the hit region is the exact image bounds — not the surrounding
@@ -120,11 +121,18 @@
   //     rewind. The wrapper gets .is-playing, which reveals the video
   //     overlay the same way :hover does on desktop. Synthetic mouse
   //     events differ per mobile browser, so touch uses click only.
-  //     Phones don't preload videos (and iOS ignores preload entirely),
-  //     so touch devices downgrade to preload="metadata": the poster
-  //     covers the entry and the video streams only when played.
-  (function () {
-    var touch = window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  //     Image-only swaps (publications) have no video to play, so the
+  //     same tap toggles the .is-playing layer swap instead.
+  // The model is not decided once at load: handlers re-check the media
+  // query, so a device kind that changes after load (browser device
+  // emulation toggled mid-session, a convertible docked/undocked) keeps
+  // working. Phones don't preload videos (and iOS ignores preload
+  // entirely), so touch devices downgrade to preload="metadata": the
+  // poster covers the entry and the video streams only when played.
+(function () {
+    var mq = window.matchMedia
+      ? window.matchMedia('(hover: none), (pointer: coarse)')
+      : { matches: false };   // very old browser: desktop behavior
 
     function play(v, wrap) {
       if (wrap) wrap.classList.add('is-playing');
@@ -142,22 +150,54 @@
     document.querySelectorAll('video.hover-video').forEach(function (v) {
       var wrap = v.closest('.entry-media-swap');   // null for standalone videos
       var target = wrap || v;
-      if (touch) {
-        v.preload = 'metadata';   // keep the phone's page light; poster covers the entry
-        v.load();
-        target.addEventListener('click', function () {
-          if (v.paused) play(v, wrap); else stop(v, wrap);
-        });
-      } else {
-        target.addEventListener('mouseenter', function () { play(v, wrap); });
-        target.addEventListener('mouseleave', function () { stop(v, wrap); });
+
+      // Touch-only downgrade, re-applied whenever the device kind flips
+      // to touch (e.g. device emulation enabled after load).
+      function downgrade() {
+        if (mq.matches && v.preload !== 'metadata') {
+          v.preload = 'metadata';   // keep the phone's page light; poster covers the entry
+          v.load();
+        }
       }
+      downgrade();
+
+      // Handlers re-check the media query instead of trusting a one-time
+      // flag: hover events do nothing on touch devices (tap's synthetic
+      // mouse events stay inert), clicks do nothing on hover devices, so
+      // desktop behavior is unchanged either way.
+      target.addEventListener('click', function () {
+        if (!mq.matches) return;
+        if (v.paused) play(v, wrap); else stop(v, wrap);
+      });
+      target.addEventListener('mouseenter', function () {
+        if (mq.matches) return;
+        play(v, wrap);
+      });
+      target.addEventListener('mouseleave', function () {
+        if (mq.matches) return;
+        stop(v, wrap);
+      });
+
+      if (mq.addEventListener) mq.addEventListener('change', downgrade);
+      else if (mq.addListener) mq.addListener(downgrade);
     });
 
-    // Play badge on standalone videos (shown by CSS on touch devices):
-    // mirror the paused state, including programmatic changes.
-    document.querySelectorAll('.video-box > video').forEach(function (v) {
-      var box = v.closest('.video-box');
+    // Image↔image swaps (publications): no video, so on touch devices the
+    // tap toggles the layer swap via the same .is-playing state the video
+    // swaps use. Video swaps are excluded — their tap plays instead.
+    document.querySelectorAll('.entry-media-swap.has-hover').forEach(function (w) {
+      if (w.querySelector('video')) return;
+      w.addEventListener('click', function () {
+        if (!mq.matches) return;
+        w.classList.toggle('is-playing');
+      });
+    });
+
+    // Play badge on video entries, standalone or in a swap wrapper (shown
+    // by CSS on touch devices): mirror the paused state, including
+    // programmatic changes.
+    document.querySelectorAll('video.hover-video').forEach(function (v) {
+      var box = v.closest('.video-box') || v.closest('.entry-media-swap');
       function sync() { box.classList.toggle('paused', v.paused); }
       v.addEventListener('pause', sync);
       v.addEventListener('play', sync);
