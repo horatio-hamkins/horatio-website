@@ -28,8 +28,12 @@ items:
     description: >
       In creating this machine, I demonstrated ephemeral fabrication, characterized stick-slip friction as a mechanism for wirebending, and created a surface-adaptive spiral wrapping algorithm.
     links:
-      - label: project page
-        url: /assets/files/FYP_final_presentation.pdf
+      - label: poster
+        url: /assets/files/fyp_poster.pdf
+      - label: slideshow
+        url: /assets/files/fyp_final_presentation.bento.html
+      - label: report
+        url: /assets/files/fyp_final_report.pdf
 
   - title: "Resin Formulation for 3D Printed Microfluidic Devices - in progress"
     image: images/microfluidics.jpg
